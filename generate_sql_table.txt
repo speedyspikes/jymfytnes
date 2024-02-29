@@ -22,7 +22,7 @@ CREATE TABLE jym.TRAINER_TrainerSpecialty
   PRIMARY KEY (TrainerSpecialty, TrainerID),
   FOREIGN KEY (TrainerID) REFERENCES TRAINER(TrainerID)
 );
-CREATE TABLE jym.ROOM_RoomEquipment
+CREATE TABLE jym.Room_Equipment
 (
   RoomEquipment VARCHAR(30) NOT NULL,
   RoomNumber INT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE jym.PERSONAL_TRAINING_SESSION
   FOREIGN KEY (RoomNumber) REFERENCES ROOM(RoomNumber),
   FOREIGN KEY (TrainerID) REFERENCES TRAINER(TrainerID)
 );
-CREATE TABLE jym.TAKES
+CREATE TABLE jym.Class_Attendance
 (
   ClassID INT NOT NULL,
   MemberID INT NOT NULL,
