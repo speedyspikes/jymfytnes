@@ -1,9 +1,9 @@
-import mysql.connector as mysql
+from database import create_client
 
 # Function to delete all dummy data from each table
 def nuke_data():
     # Connect to the SQLite database
-    conn = mysql.connect('jym.db')
+    conn = create_client()
     cursor = conn.cursor()
 
     cursor.execute("DELETE FROM TRAINER")

@@ -4,30 +4,25 @@ import os
 
 load_dotenv()
 
-mydb = mysql.connector.connect(
-  host=os.getenv('DB-HOST'),
-  user=os.getenv('DB-USERNAME'),
-  password=os.getenv('DB-PASSWORD'),
-  database=os.getenv('DB-DATABASE')
-)
+def create_client():
+  mydb = mysql.connector.connect(
+    host=os.getenv('DB-HOST'),
+    user=os.getenv('DB-USERNAME'),
+    password=os.getenv('DB-PASSWORD'),
+    database=os.getenv('DB-DATABASE')
+  )
+  return mydb
 
-mycursor = mydb.cursor()
-#I'll fix this formatting later...
-sql = """INSERT INTO jym.member 
-                 (MemberEmail, 
-                 MembershipTier, 
-                 MemberPhone, 
-                 MemberName, 
-                 MemberID, 
-                 MemberGender)
-                 VALUES
-                 (%s, %s, %s, %s, %s, %s)"""
-val = ("john@example.com", "1", "4801234567", "John Smith", 123, 1)
-mycursor.execute(sql, val)
 
-mydb.commit()
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x)
+# If you run the dtabase.py file, it will test your connection.
+if __name__ == "__main__":
+    client = create_client()
+    # Try to show member data
+    try:
+      mycursor = client.cursor()
+      mycursor.execute("SELECT * FROM jym.member")
+      myresult = mycursor.fetchall()
+      for x in myresult:
+        print(x)
+    except Exception as e:
+        print(e)

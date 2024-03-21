@@ -1,9 +1,9 @@
-import mysql.connector as mysql
+from database import create_client
 
 # Function to insert dummy data into each table
 def insert_dummy_data():
     # Connect to the SQLite database
-    conn = mysql.connect('jym.db')
+    conn = create_client()
     cursor = conn.cursor()
 
     # Insert dummy data into tables
@@ -73,7 +73,7 @@ def insert_dummy_data():
 # Function to delete dummy data from each table
 def delete_dummy_data():
     # Connect to the SQLite database
-    conn = mysql.connect('jym.db')
+    conn = create_client()
     cursor = conn.cursor()
 
     cursor.execute("DELETE FROM TRAINER WHERE TrainerID IN (1, 2)")
