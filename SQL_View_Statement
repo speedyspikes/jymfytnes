@@ -1,3 +1,15 @@
 --SQL View Statment for selecting information that is used between the room page, classes page, and trainers page
 
 --First, do a join, then a select
+
+--a basic pattern to follow:
+
+--CREATE VIEW employee_info AS
+--SELECT e.employee_id, e.first_name, e.last_name, d.department_name, s.salary
+--FROM employees e
+--JOIN departments d ON e.department_id = d.department_id
+--JOIN salaries s ON e.employee_id = s.employee_id;
+
+
+CREATE VIEW member_info AS
+SELECT 
