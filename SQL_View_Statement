@@ -11,6 +11,6 @@
 --JOIN salaries s ON e.employee_id = s.employee_id;
 
 
-CREATE VIEW member_info AS
+CREATE VIEW class_trainer_info AS
 SELECT * FROM trainer
 LEFT JOIN class ON class.TrainerID = trainer.TrainerID
