@@ -12,4 +12,5 @@
 
 
 CREATE VIEW member_info AS
-SELECT 
+SELECT * FROM trainer
+LEFT JOIN class ON class.TrainerID = trainer.TrainerID
