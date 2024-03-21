@@ -12,8 +12,20 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+#I'll fix this formatting later...
+sql = """INSERT INTO jym.member 
+                 (MemberEmail, 
+                 MembershipTier, 
+                 MemberPhone, 
+                 MemberName, 
+                 MemberID, 
+                 MemberGender)
+                 VALUES
+                 (%s, %s, %s, %s, %s, %s)"""
+val = ("john@example.com", "1", "4801234567", "John Smith", 123, 1)
+mycursor.execute(sql, val)
 
-mycursor.execute("SELECT * FROM jym.member")
+mydb.commit()
 
 myresult = mycursor.fetchall()
 
