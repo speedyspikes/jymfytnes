@@ -12,5 +12,7 @@
 
 
 CREATE VIEW class_trainer_info AS
-SELECT * FROM trainer
-LEFT JOIN class ON class.TrainerID = trainer.TrainerID
+SELECT * 
+FROM trainer
+FULL JOIN class ON class.TrainerID = trainer.TrainerID
+FULL JOIN room ON room.RoomNumber = class.RoomNumber;
