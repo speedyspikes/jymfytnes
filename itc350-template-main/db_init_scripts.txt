@@ -1,4 +1,4 @@
-CREATE DATABASE `jymfitness`;
+CREATE DATABASE `jym`;
 
 CREATE TABLE jym.TRAINER
 (
