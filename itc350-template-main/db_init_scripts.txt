@@ -1,4 +1,4 @@
-CREATE DATABASE `itemdb`;
+CREATE DATABASE `jymfitness`;
 
 CREATE TABLE `items` (
   `id` int NOT NULL AUTO_INCREMENT,
