@@ -1,8 +1,82 @@
 CREATE DATABASE `jymfitness`;
 
-CREATE TABLE `items` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `quantity` int NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE jym.TRAINER
+(
+  TrainerID INT NOT NULL,
+  TrainerSSN CHAR(9) NOT NULL,
+  TrainerEmail VARCHAR(40) NOT NULL,
+  TrainerName VARCHAR(30) NOT NULL,
+  TrainerPhone VARCHAR(10) NOT NULL,
+  TrainerGender INT NOT NULL,
+  PRIMARY KEY (TrainerID),
+  UNIQUE (TrainerSSN),
+  UNIQUE (TrainerEmail)
+);
+CREATE TABLE jym.ROOM
+(
+  RoomNumber INT NOT NULL,
+  PRIMARY KEY (RoomNumber)
+);
+CREATE TABLE jym.TRAINER_TrainerSpecialty
+(
+  TrainerSpecialty VARCHAR(25) NOT NULL,
+  TrainerID INT NOT NULL,
+  PRIMARY KEY (TrainerSpecialty, TrainerID),
+  FOREIGN KEY (TrainerID) REFERENCES TRAINER(TrainerID)
+);
+CREATE TABLE jym.Room_Equipment
+(
+  RoomEquipment VARCHAR(30) NOT NULL,
+  RoomNumber INT NOT NULL,
+  PRIMARY KEY (RoomEquipment, RoomNumber),
+  FOREIGN KEY (RoomNumber) REFERENCES ROOM(RoomNumber)
+);
+CREATE TABLE jym.MEMBER
+(
+  MemberEmail VARCHAR(40) NOT NULL,
+  MembershipTier INT NOT NULL,
+  MemberPhone VARCHAR(10) NOT NULL,
+  MemberName VARCHAR(30) NOT NULL,
+  MemberID INT NOT NULL,
+  MemberGender INT NOT NULL,
+  RoomNumber INT,
+  PRIMARY KEY (MemberID),
+  FOREIGN KEY (RoomNumber) REFERENCES ROOM(RoomNumber),
+  UNIQUE (MemberEmail)
+);
+CREATE TABLE jym.CLASS
+(
+  ClassID INT NOT NULL,
+  ClassName VARCHAR(25) NOT NULL,
+  ClassTime CHAR(4) NOT NULL,
+  ClassDayOfWeek INT NOT NULL,
+  ClassNumberMembers INT NOT NULL,
+  ClassType VARCHAR(25) NOT NULL,
+  RoomNumber INT NOT NULL,
+  TrainerID INT NOT NULL,
+  PRIMARY KEY (ClassID),
+  FOREIGN KEY (RoomNumber) REFERENCES ROOM(RoomNumber),
+  FOREIGN KEY (TrainerID) REFERENCES TRAINER(TrainerID)
+);
+CREATE TABLE jym.PERSONAL_TRAINING_SESSION
+(
+  SessionDayOfWeek INT NOT NULL,
+  SessionTime CHAR(4) NOT NULL,
+  SessionID INT NOT NULL,
+  SessionType VARCHAR(25) NOT NULL,
+  MemberID INT,
+  RoomNumber INT NOT NULL,
+  TrainerID INT NOT NULL,
+  PRIMARY KEY (SessionID),
+  FOREIGN KEY (MemberID) REFERENCES MEMBER(MemberID),
+  FOREIGN KEY (RoomNumber) REFERENCES ROOM(RoomNumber),
+  FOREIGN KEY (TrainerID) REFERENCES TRAINER(TrainerID)
+);
+CREATE TABLE jym.Class_Attendance
+(
+  ClassID INT NOT NULL,
+  MemberID INT NOT NULL,
+  PRIMARY KEY (ClassID, MemberID),
+  FOREIGN KEY (ClassID) REFERENCES CLASS(ClassID),
+  FOREIGN KEY (MemberID) REFERENCES MEMBER(MemberID)
 );
