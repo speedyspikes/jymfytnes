@@ -5,8 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jym Fitness</title>
     <link rel="stylesheet" href="static/css/styles.css">
+    <style>
+        /* Add some basic styling for the tabs */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
 </head>
 <body>
+    <!-- Add the tabs at the top of the page -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'HomePage')">Home Page</button>
+        <button class="tablinks" onclick="openTab(event, 'Classes')">Classes</button>
+        <button class="tablinks" onclick="openTab(event, 'Account')">Account</button>
+        <button class="tablinks" onclick="openTab(event, 'Events')">Events</button>
+    </div>
+
+    <!-- Add the content for each tab -->
+    <div id="HomePage" class="tabcontent">
+        <h3>Home Page</h3>
+        <p>Home page content goes here.</p>
+    </div>
+
+    <div id="Classes" class="tabcontent">
+        <h3>Classes</h3>
+        <p>Classes content goes here.</p>
+    </div>
+
+    <div id="Account" class="tabcontent">
+        <h3>Account</h3>
+        <p>Account content goes here.</p>
+    </div>
+
+    <div id="Events" class="tabcontent">
+        <h3>Events</h3>
+        <p>Events content goes here.</p>
+    </div>
+
+    <!-- The rest of your existing code goes here -->
+
     <!-- Show error or success messages if there are any -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         <!-- Check to see if there are any messages to show -->
@@ -40,5 +105,22 @@
             <li>Name: {{ item[0] }} - Quantity: {{ item[1] }}</li>
         {% endfor %}
     </ul>
+
+    <!-- Add some JavaScript to handle the tab switching -->
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html>
