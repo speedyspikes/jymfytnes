@@ -24,6 +24,11 @@
             font-size: 17px;
         }
 
+        /* Add a right-floated button for the sign in tab */
+        .tab button.right {
+            float: right;
+        }
+
         .tab button:hover {
             background-color: #ddd;
         }
@@ -48,6 +53,8 @@
         <button class="tablinks" onclick="openTab(event, 'Classes')">Classes</button>
         <button class="tablinks" onclick="openTab(event, 'Account')">Account</button>
         <button class="tablinks" onclick="openTab(event, 'Events')">Events</button>
+        <!-- Add the sign in tab -->
+        <button class="tablinks right" onclick="openTab(event, 'SignIn')">Sign In</button>
     </div>
 
     <!-- Add the content for each tab -->
@@ -69,6 +76,12 @@
     <div id="Events" class="tabcontent">
         <h3>Events</h3>
         <p>Events content goes here.</p>
+    </div>
+
+    <!-- Add the sign in tab content -->
+    <div id="SignIn" class="tabcontent">
+        <h3>Sign In</h3>
+        <p>Sign in content goes here.</p>
     </div>
 
     <!-- The rest of your existing code goes here -->
