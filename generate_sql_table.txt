@@ -1,3 +1,5 @@
+USE jym;
+
 CREATE TABLE jym.TRAINER
 (
   TrainerID INT NOT NULL,
