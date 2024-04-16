@@ -28,4 +28,9 @@ def nuke_data():
 
 
 if __name__ == "__main__":
-  nuke_data()
+  action = input("Are you sure you want to NUKE all data? (y/n): ")
+  if action == "y":
+      print("Nuking all data")
+      nuke_data()
+  else:
+     print("Nuke aborted")
