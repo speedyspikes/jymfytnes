@@ -24,12 +24,12 @@ def get_db_connection():
     return conn
 
 # Get all items from the "items" table of the db
-def get_all_items():
+def get_all_trainers():
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT name, quantity FROM items"
+    query = "SELECT * FROM TRAINER"
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
