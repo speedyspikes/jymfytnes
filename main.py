@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from dotenv import load_dotenv
+from database import create_client
 
 
 # Load environment variables from .env file
@@ -13,23 +14,15 @@ app.secret_key = os.getenv("SECRET")
 
 
 # ------------------------ BEGIN FUNCTIONS ------------------------ #
-# Function to retrieve DB connection
-def get_db_connection():
-    conn = mysql.connector.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_DATABASE")
-    )
-    return conn
+
 
 # Get all items from the "items" table of the db
-def get_all_trainers():
+def get_all_classes():
     # Create a new database connection for each request
-    conn = get_db_connection()  # Create a new database connection
+    conn = create_client()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * FROM TRAINER"
+    query = "SELECT ClassName, ClassTime, ClassDayOfWeek, RoomNumber FROM CLASS"
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
@@ -42,19 +35,23 @@ def get_all_trainers():
 # EXAMPLE OF GET REQUEST
 @app.route("/", methods=["GET"])
 def home():
-    items = get_all_items() # Call defined function to get all items
-    return render_template("index.html", items=items) # Return the page to be rendered
+    classes = get_all_classes() # Call defined function to get all items
+    return render_template("index.html", classes=classes) # Return the page to be rendered
 
 # EXAMPLE OF POST REQUEST
-@app.route("/new-item", methods=["POST"])
-def add_item():
+@app.route("/new-session", methods=["POST"])
+def add_session():
     try:
         # Get items from the form
         data = request.form
-        item_name = data["name"] # This is defined in the input element of the HTML form on index.html
-        item_quantity = data["quantity"] # This is defined in the input element of the HTML form on index.html
+        session_day = data["SessionDayOfWeek"]
+        session_time = data["SessionTime"]
+        session_type = data["SessionType"]
+        session_room = data["RoomNumber"]
+        session_member = data["MemberID"]
+        session_trainer = data["TrainerID"]
 
-        # TODO: Insert this data into the database
+        #
         
         # Send message to page. There is code in index.html that checks for these messages
         flash("Item added successfully", "success")
