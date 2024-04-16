@@ -18,8 +18,8 @@ def insert_dummy_data():
         INSERT INTO ROOM (RoomNumber)
         VALUES (%s)
     """
-    cursor.execute(sql_insert_room, (101))
-    cursor.execute(sql_insert_room, (102))
+    cursor.execute(sql_insert_room, (101,))
+    cursor.execute(sql_insert_room, (102,))
 
     sql_insert_trainer_specialty = """
         INSERT INTO TRAINER_TrainerSpecialty (TrainerSpecialty, TrainerID)
