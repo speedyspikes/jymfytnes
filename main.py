@@ -41,17 +41,25 @@ def home():
 # EXAMPLE OF POST REQUEST
 @app.route("/new-session", methods=["POST"])
 def add_session():
+    conn = create_client()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+
     try:
         # Get items from the form
         data = request.form
         session_day = data["SessionDayOfWeek"]
         session_time = data["SessionTime"]
         session_type = data["SessionType"]
-        session_room = data["RoomNumber"]
         session_member = data["MemberID"]
+        session_room = data["RoomNumber"]
         session_trainer = data["TrainerID"]
 
         #
+        sql_insert_personal_training_session = """
+            INSERT INTO PERSONAL_TRAINING_SESSION (SessionDayOfWeek, SessionTime, SessionType, MemberID, RoomNumber, TrainerID)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(sql_insert_personal_training_session, (session_day, session_time, session_type, session_member, session_room, session_trainer))
         
         # Send message to page. There is code in index.html that checks for these messages
         flash("Item added successfully", "success")
