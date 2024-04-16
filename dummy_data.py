@@ -76,6 +76,9 @@ def delete_dummy_data():
     conn = create_client()
     cursor = conn.cursor()
 
+    # Temporarily disable foreign key checks
+    cursor.execute("SET FOREIGN_KEY_CHECKS=0;")
+
     cursor.execute("DELETE FROM TRAINER WHERE TrainerID IN (1, 2)")
     cursor.execute("DELETE FROM ROOM WHERE RoomNumber IN (101, 102)")
     cursor.execute("DELETE FROM TRAINER_TrainerSpecialty WHERE TrainerID IN (1, 2)")
@@ -86,6 +89,9 @@ def delete_dummy_data():
     cursor.execute("DELETE FROM Class_Attendance WHERE ClassID IN (1, 2)")
     conn.commit()
     print("Dummy data deleted successfully.")
+
+    # Re-enable foreign key checks
+    cursor.execute("SET FOREIGN_KEY_CHECKS=1;")
 
     # Close the cursor and connection
     cursor.close()
